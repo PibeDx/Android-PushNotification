@@ -9,6 +9,7 @@ import java.util.Map;
  */
 
 public class PushNotification {
+    private String messageId;
     private String title;
     private String body;
     private String data;
@@ -76,5 +77,13 @@ public class PushNotification {
 
     private void validate() {
         if (mMap == null || mMap.isEmpty()) throw new NullPointerException("mMap is null or is empty");
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getMessageId() {
+        return messageId;
     }
 }

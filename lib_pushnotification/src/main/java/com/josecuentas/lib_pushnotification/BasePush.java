@@ -46,6 +46,7 @@ public abstract class BasePush implements Push {
         intent.putExtras(getBundle());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setAction(Long.toString(System.currentTimeMillis()));
         return intent;
     }
 
@@ -59,13 +60,13 @@ public abstract class BasePush implements Push {
     @Override public void showNotification() {
         validation();
         NotificationManager notificationManager = getNotificationManager();
-        notificationManager.notify(0, nBuilder.build());
+        notificationManager.notify(Integer.parseInt(mPushNotification.getMessageId()), nBuilder.build());
     }
 
     protected void notification() {
         Bitmap bitmapLargeIcon = BitmapFactory.decodeResource(getResources(), getIcon());
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, getIntentGo(), PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, getIntentGo(), PendingIntent.FLAG_UPDATE_CURRENT);
 
         nBuilder = new NotificationCompat.Builder(getContext());
         nBuilder.setSmallIcon(getIcon())
