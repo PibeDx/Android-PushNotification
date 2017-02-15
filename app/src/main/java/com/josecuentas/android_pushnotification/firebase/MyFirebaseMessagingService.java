@@ -22,7 +22,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         RemoteMessage.Notification notification = remoteMessage.getNotification();
         String title = notification.getTitle();
         String body = notification.getBody();
+        String messageId = mRemoteMessage.getMessageId();
         PushNotification pushNotification = new PushNotification(mRemoteMessage.getData());
+        pushNotification.setMessageId(messageId);
         pushNotification.setTitle(title);
         pushNotification.setBody(body);
         FactoryCallback factoryCallback = new PushFactory(this, pushNotification);
